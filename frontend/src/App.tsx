@@ -10,6 +10,7 @@ import useGetBlogList from "./Hook/useGetBlogList";
 import BlogList from "./Component/BlogList";
 import HideIfNotLogged from "./Component/HideIfNotLogged";
 import BlogForm from "./Component/BlogForm";
+import Navbar from './Component/Navbar';
 import useGetCookies from "./Hook/useGetCookies";
 import useEraseCookie from "./Hook/useEraseCookie";
 
@@ -72,17 +73,20 @@ export default function App() {
     }
 
     return (
-        <div className='container mt-5'>
-            <HideIfLogged loggedUser={loggedUser}>
-                <LoginForm setLocalUser={setLocalUser} needsLogin={needsLogin} setNeedsLogin={setNeedsLogin}/>
-            </HideIfLogged>
+        <>
+            <Navbar />
+            <div className='container mt-5'>
+                <HideIfLogged loggedUser={loggedUser}>
+                    <LoginForm setLocalUser={setLocalUser} needsLogin={needsLogin} setNeedsLogin={setNeedsLogin}/>
+                </HideIfLogged>
 
-            <HideIfNotLogged loggedUser={loggedUser}>
-                <button className='btn btn-danger d-block mx-auto mb-3' onClick={handleDisconnect}>Disconnect</button>
-                <BlogForm loggedUser={loggedUser} setNeedsUpdate={setNeedsUpdate}/>
-            </HideIfNotLogged>
+                <HideIfNotLogged loggedUser={loggedUser}>
+                    <button className='btn btn-danger d-block mx-auto mb-3' onClick={handleDisconnect}>Disconnect</button>
+                    <BlogForm loggedUser={loggedUser} setNeedsUpdate={setNeedsUpdate}/>
+                </HideIfNotLogged>
 
-            <BlogList blogList={blogList}/>
-        </div>
+                <BlogList blogList={blogList}/>
+            </div>
+        </>
     )
 }
