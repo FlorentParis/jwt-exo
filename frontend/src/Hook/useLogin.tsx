@@ -3,7 +3,10 @@ import {LoginResponseInterface} from "../Interface/ResponsesInterfaces";
 
 export default function useLogin() {
     return (username: string, password: string): Promise<LoginResponseInterface> => {
-        return axios.get('http://localhost:2345/login.php', {
+        return axios({
+            url: 'http://localhost:2345/login.php',
+            method: 'get',
+            withCredentials: true,
             headers: {
                 Authorization: `Basic ${btoa(username + ':' + password)}`
             }

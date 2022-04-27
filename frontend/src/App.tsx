@@ -13,6 +13,7 @@ import BlogForm from "./Component/BlogForm";
 import Navbar from './Component/Navbar';
 import useGetCookies from "./Hook/useGetCookies";
 import useEraseCookie from "./Hook/useEraseCookie";
+import useAutoConnect from './Hook/useAutoConnect';
 
 export default function App() {
     const [loggedUser, setLoggedUser] = useState<LoginResponseInterface>({
@@ -28,6 +29,7 @@ export default function App() {
 
     const login = useLogin();
     const register = useRegister();
+    const autoConnect = useAutoConnect();
     const getBlogList = useGetBlogList();
     const cookies = useGetCookies();
     const eraseCookie = useEraseCookie();
@@ -35,12 +37,16 @@ export default function App() {
     useEffect(() => {
         if (Object.keys(cookies).includes('hetic_token') && Object.keys(cookies).includes('hetic_username')) {
             console.log('got cookies !', loggedUser)
+            console.log(cookies);
             setLoggedUser(prev => ({
                 ...prev,
                 username: cookies.hetic_username,
                 token: cookies.hetic_token
             }))
         }
+        /* if (Object.keys(cookies).includes('public_key')){
+            
+        } */
     }, [])
 
     useEffect(() => {

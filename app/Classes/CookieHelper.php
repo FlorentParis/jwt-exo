@@ -11,8 +11,8 @@ class CookieHelper
     public static function createJWT(): void
     {
         $res = openssl_pkey_new();
-        openssl_pkey_export_to_file($res, '../keys/rsaPrivateKey.key');
+        openssl_pkey_export_to_file($res, './keys/rsaPrivateKey.key');
         $details = openssl_pkey_get_details($res);
-        setcookie('private_key', $details['key'], time() + 60, '/', 'localhost', false, false);
+        setcookie('public_key', $details['key'], time() + 60, '/', 'localhost', false, false);
     }
 }
