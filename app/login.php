@@ -26,6 +26,7 @@ if ($query->execute()) {
     $user = $query->fetch();
     if ($user && password_verify($password, $user->getPassword())) {
 
+        CookieHelper::createJWT();
         CookieHelper::setCookie($user->getToken(), $user->getUsername());
 
         echo json_encode([
